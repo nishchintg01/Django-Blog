@@ -1,0 +1,32 @@
+{% extends 'blog/base.html' %}
+{% load static %}
+{% include sidebar %}
+{% block card %}
+{% if messages %}
+{% for msg in messages %}
+<div class="conatiner" style='margin-top:1%;margin-left:8%;margin-right:40%;text-align:center;'>
+  <div class="alert alert-danger" role="alert">
+  {{msg}}
+  </div>
+</div>
+  {% endfor %}
+{% endif %}
+<div class="cardmy">
+{% for data in data %}
+  <div class="card text-center">
+  <div class="card-header">
+    {{data.user}}
+  </div>
+  <div class="card-body">
+    <h5 class="card-title">{{data.title}}</h5>
+    <p class="card-text">{{data.descrription}}</p>
+    <a href="blog/{{data.user}}/{{data.id}}" class="btn btn-primary">view more</a>
+  </div>
+  <div class="card-footer text-muted">
+    {{data.time_stamp}}
+  </div>
+</div>
+{% endfor %}
+{% endblock card %}
+{% block pagination %}
+{% endblock %}

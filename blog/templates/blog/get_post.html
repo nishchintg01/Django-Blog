@@ -1,0 +1,17 @@
+{% extends 'blog/base.html' %}
+{% block card %}
+<div class="cardmy">
+<div class="card text-center">
+<div class="card-header">
+  {{data.user}}
+</div>
+<div class="card-body">
+  <h5 class="card-title">{{data.title}}</h5>
+  <p class="card-text">{{data.descrription}}</p>
+</div>
+<div class="card-footer text-muted">
+{{data.time_stamp}}
+</div>
+</div>
+</div>
+{% endblock card %}

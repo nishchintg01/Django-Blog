@@ -1,0 +1,157 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<link rel="stylesheet" type="text/css" href="{% static 'css/style.css' %}">
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>B-Blog|Home</title>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+<link href="https://fonts.googleapis.com/css?family=Varela+Round" rel="stylesheet">
+<link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+</head>
+<body style='background-image:url({% static "img/12.jpg" %});'>
+<nav class="navbar navbar-default navbar-expand-lg sticky-top navbar-light rounded border-primary" style="margin-top:0.3%;margin-left:8%;margin-right:8%;">
+	<div class="navbar-header d-flex col">
+		<a class="navbar-brand" href="{% url 'home' %}">B-<b>Blog</b></a>
+		<button type="button" data-target="#navbarCollapse" data-toggle="collapse" class="navbar-toggle navbar-toggler ml-auto">
+			<span class="navbar-toggler-icon"></span>
+			<span class="icon-bar"></span>
+			<span class="icon-bar"></span>
+			<span class="icon-bar"></span>
+		</button>
+	</div>
+  {% if request.user.is_authenticated %}
+	<!-- Collection of nav links, forms, and other content for toggling -->
+	<div id="navbarCollapse" class="collapse navbar-collapse justify-content-start">
+		<ul class="nav navbar-nav">
+			<li class="nav-item"><a href="{% url 'home' %}" class="nav-link active">Home</a></li>
+			<li class="nav-item dropdown">
+				<a data-toggle="dropdown" class="nav-link dropdown-toggle" href="#"><b class="caret">profile</b></a>
+				<ul class="dropdown-menu">
+					<li><a href="#" class="dropdown-item">Settings</a></li>
+					<li><a href="#" class="dropdown-item">Change Password</a></li>
+					<li><a href="#" class="dropdown-item">Logout</a></li>
+				</ul>
+			</li>
+			<li class="nav-item"><a href="{% url 'home' %}" class="nav-link">Blog</a></li>
+		</ul>
+		<form class="navbar-form form-inline" action="{% url "search" %}" method="post">{% csrf_token %}
+			<div class="input-group search-box">
+				<input type="text" id="search" name="search" class="form-control" placeholder="Search Titles here...">
+				<span class="input-group-addon"><i class="material-icons">&#xE8B6;</i></span>
+        <input class="btn btn-outline-primary" type="submit" role="submit" value="search">
+			</div>
+		</form>
+		<ul class="nav navbar-nav navbar-right ml-auto">
+      <li class="nav-item">
+				<a href="{% url 'logout' %}" role='submit' class="btn btn-primary dropdown-toggle get-started-btn mt-1 mb-1">Logout</a>
+        </li>
+        </div>
+        {% else %}
+        <div id="navbarCollapse" class="collapse navbar-collapse justify-content-start">
+      		<ul class="nav navbar-nav">
+      			<li class="nav-item"><a href="{% url 'home' %}" class="nav-link">Home</a></li>
+      		</ul>
+      		<form class="navbar-form form-inline" action="{% url 'search' %}" method="post">{% csrf_token %}
+      			<div class="input-group search-box">
+      				<input type="text" id="search" class="form-control" name="search" placeholder="Search Titles here...">
+      				<span class="input-group-addon"><i class="material-icons">&#xE8B6;</i></span>
+              <input class="btn btn-outline-primary" type="submit" role="submit" value="search">
+      			</div>
+      		</form>
+        <ul class="nav navbar-nav navbar-right ml-auto">
+			<li class="nav-item">
+				<a class="nav-link dropdown-toggle" href="{% url "login" %}">Login</a></li>
+        <li class="nav-item">
+          <a href="{% url 'signup' %}" class="btn btn-primary dropdown-toggle get-started-btn mt-1 mb-1">Signup</a>
+</li>
+      </ul>
+	</div>
+
+  {% endif %}
+</nav>
+
+
+{% block sidebar %}
+<div class="sidebar">
+  <div class="list-group">
+  <a href="#" class="list-group-item list-group-item-action active">
+    <b>Categories</b>
+  </a>
+  <a href="#" class="list-group-item list-group-item-action">Buisness</a>
+  <a href="#" class="list-group-item list-group-item-action">Technology</a>
+  <a href="#" class="list-group-item list-group-item-action">Games</a>
+  <a href="#" class="list-group-item list-group-item-action">Weather</a>
+</div>
+</div>
+{% endblock sidebar %}
+{% block latest_posts %}
+<div class="latest-posts">
+  <h5 style='color:white;text-align:center;padding:2px 2px 2px 2px;'>LATEST POSTS</h5>
+  <div class="list-group" style="box-shadow: 10px 10px 6px #aaaaaa;">
+  <a href="#" class="list-group-item list-group-item-action flex-column align-items-start active">
+    <div class="d-flex w-100 justify-content-between">
+      <h5 class="mb-1">List group item heading</h5>
+      <small>3 days ago</small>
+    </div>
+    <p class="mb-1">Donec id elit non mi porta gravida at eget metus. Maecenas sed diam eget risus varius blandit.</p>
+    <small>Donec id elit non mi porta.</small>
+  </a>
+  <a href="#" class="list-group-item list-group-item-action flex-column align-items-start">
+    <div class="d-flex w-100 justify-content-between">
+      <h5 class="mb-1">List group item heading</h5>
+      <small class="text-muted">3 days ago</small>
+    </div>
+    <p class="mb-1">Donec id elit non mi porta gravida at eget metus. Maecenas sed diam eget risus varius blandit.</p>
+    <small class="text-muted">Donec id elit non mi porta.</small>
+  </a>
+  <a href="#" class="list-group-item list-group-item-action flex-column align-items-start">
+    <div class="d-flex w-100 justify-content-between">
+      <h5 class="mb-1">List group item heading</h5>
+      <small class="text-muted">3 days ago</small>
+    </div>
+    <p class="mb-1">Donec id elit non mi porta gravida at eget metus. Maecenas sed diam eget risus varius blandit.</p>
+    <small class="text-muted">Donec id elit non mi porta.</small>
+  </a>
+</div>
+</div>
+{% endblock latest_posts %}
+{% block card %}
+<div class="cardmy">
+<div class="card text-center">
+<div class="card-header">
+  Featured
+</div>
+<div class="card-body">
+  <h5 class="card-title">Special title treatment</h5>
+  <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
+  <a href="#" class="btn btn-primary">Go somewhere</a>
+</div>
+<div class="card-footer text-muted">
+  2 days ago
+</div>
+</div>
+</div>
+{% endblock card %}
+{% block pagination %}
+<nav aria-label="Page navigation example" style="margin-top:1%;">
+  <ul class="pagination justify-content-center">
+    <li class="page-item disabled">
+      <a class="page-link" href="#" tabindex="-1">Previous</a>
+    </li>
+    <li class="page-item"><a class="page-link" href="#">1</a></li>
+    <li class="page-item"><a class="page-link" href="#">2</a></li>
+    <li class="page-item"><a class="page-link" href="#">3</a></li>
+    <li class="page-item">
+      <a class="page-link" href="#">Next</a>
+    </li>
+  </ul>
+</nav>
+{% endblock %}
+</body>
+</html>

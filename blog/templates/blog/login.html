@@ -1,0 +1,26 @@
+{% extends 'blog/base.html' %}
+{% load crispy_forms_tags %}
+{% block sidebar %}
+{% endblock %}
+{% block latest_posts %}
+{% endblock %}
+{% block card %}
+{% if messages %}
+{% for msg in messages %}
+<div class="conatiner" style='margin-top:1%;margin-left:35%;margin-right:35%;text-align:center;'>
+  <div class="alert alert-{{msg.tags}}" role="alert">
+  {{msg}}
+  </div>
+</div>
+  {% endfor %}
+{% endif %}
+<div class="rounded" style=' box-shadow: 10px 10px 6px #aaaaaa;background:aqua;margin-left:30%;margin-right:30%;margin-top:0.8%;padding:2px 45px 10px 34px;height:40%;margin-bottom:0.8%;'>
+<form class="form" action="{% url 'login' %}" method="post">{% csrf_token %}
+{{form|crispy}}
+<input class="btn-block btn-lg btn-success" type="submit" value="Login" style='margin-bottom:1%;margin-top:6%;'><br>
+<a style='text-align:center;' href="{% url 'signup' %}"><center>Not Registered?Create an Account</center></a>
+</form>
+</div>
+{% endblock %}
+{% block pagination %}
+{% endblock %}
